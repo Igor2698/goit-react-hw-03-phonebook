@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
+import InputMask from 'react-input-mask';
 import {
   StyledForm,
   Label,
@@ -14,19 +15,29 @@ import {
 const formSchema = Yup.object().shape({
   name: Yup.string()
     .matches(/^[a-zA-Z\s]+$/, 'Only letters are allowed')
-    .min(3, 'Too Short!')
+    .min(2, 'Too Short!')
     .required('This field is required, please fill that'),
   number: Yup.string()
-    .matches(/^\d{3}-\d{2}-\d{2}$/, 'Must be in format: 000-00-00')
+    .matches(
+      /^\+380[-\s\d]*$/,
+      'Must start with +380'
+    )
+    .min(12, 'Too Short!')
     .required('This field is required, please fill that'),
 });
 
 const MyForm = ({ onSubmit }) => {
+  const handleNumberChange = e => {
+    const inputText = e.target.value;
+
+    // Проверяем, что пользователь не удаляет символ "+"
+  };
+
   return (
     <Formik
       initialValues={{
         name: '',
-        number: '',
+        number: '+380 00 123 45 67',
       }}
       validationSchema={formSchema}
       onSubmit={(values, actions) => {
@@ -36,14 +47,14 @@ const MyForm = ({ onSubmit }) => {
     >
       <StyledForm>
         <InputContainer>
-          <StyledField type="text" name="name" placeholder=" " />
-          <Label htmlFor="name">Please enter name:</Label>
+          <StyledField type="text" name="name" placeholder="Alex Repeta" />
+          <Label htmlFor="name">Please enter a name:</Label>
 
           <ErrorMsg name="name" component="div" />
         </InputContainer>
         <InputContainer>
-          <StyledField type="tel" name="number" placeholder=" " />
-          <Label htmlFor="number">Please enter number:</Label>
+          <StyledField type="tel" name="number" />
+          <Label htmlFor="number">Please enter a number:</Label>
 
           <ErrorMsg name="number" component="div" />
         </InputContainer>
