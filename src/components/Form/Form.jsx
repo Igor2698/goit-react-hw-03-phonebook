@@ -27,7 +27,7 @@ const MyForm = ({ onSubmit }) => {
   return (
     <Formik
       initialValues={{
-        name: '',
+        name: 'Alex Repeta',
         number: '+380 00 123 45 67',
       }}
       validationSchema={formSchema}
