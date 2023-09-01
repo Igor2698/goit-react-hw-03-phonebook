@@ -27,8 +27,8 @@ const MyForm = ({ onSubmit }) => {
   return (
     <Formik
       initialValues={{
-        name: 'Alex Repeta',
-        number: '+380 00 123 45 67',
+        name: '',
+        number: '+380',
       }}
       validationSchema={formSchema}
       onSubmit={(values, actions) => {
@@ -36,22 +36,36 @@ const MyForm = ({ onSubmit }) => {
         actions.resetForm();
       }}
     >
-      <StyledForm>
-        <InputContainer>
-          <StyledField type="text" name="name" placeholder="Alex Repeta" />
-          <Label htmlFor="name">Please enter a name:</Label>
-
-          <ErrorMsg name="name" component="div" />
-        </InputContainer>
-        <InputContainer>
-          <StyledField type="tel" name="number" />
-          <Label htmlFor="number">Please enter a number:</Label>
-
-          <ErrorMsg name="number" component="div" />
-        </InputContainer>
-
-        <ButtonForm type="submit">Add contact</ButtonForm>
-      </StyledForm>
+      {({ handleChange }) => (
+        <StyledForm>
+          <InputContainer>
+            <StyledField type="text" name="name" placeholder="Alex Repeta" />
+            <Label htmlFor="name">Please enter a name:</Label>
+            <ErrorMsg name="name" component="div" />
+          </InputContainer>
+          <InputContainer>
+            <StyledField
+            
+              type="tel"
+              name="number"
+              onChange={e => {
+                if (!e.target.value.startsWith('+380')) {
+                  handleChange({
+                    target: {
+                      value: '+380',
+                    },
+                  });
+                } else {
+                  handleChange(e);
+                }
+              }}
+            />
+            <Label htmlFor="number">Please enter a number:</Label>
+            <ErrorMsg name="number" component="div" />
+          </InputContainer>
+          <ButtonForm type="submit">Add contact</ButtonForm>
+        </StyledForm>
+      )}
     </Formik>
   );
 };

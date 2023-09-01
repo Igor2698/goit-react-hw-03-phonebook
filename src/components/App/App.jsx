@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { nanoid } from 'nanoid';
 import css from './App.module.css';
-import Form from '../Form';
+import MyForm from 'components/Form/Form';
 import Section from '../Section';
 import ContactsList from '../ContactsList';
 import Filter from '../Filter';
@@ -81,7 +81,7 @@ export class App extends Component {
     return (
       <div>
         <Section title="Phonebook">
-          <Form onSubmit={this.addContact} />
+          <MyForm onSubmit={this.addContact} />
         </Section>
         <Section>
           <Filter value={filter} onChange={this.changeFilter} />

@@ -42,8 +42,7 @@ transition: opacity 0.8s, font-size 0.3s, color 0.3s;
 pointer-events: none;
 color: #19a911;
 opacity: 0;
-${StyledField}:focus + &, 
-${StyledField}:not(:placeholder-shown) + & {
+${StyledField}:focus + & {
   opacity: 1;
 }
 
