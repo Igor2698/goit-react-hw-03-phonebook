@@ -33,7 +33,9 @@ span.number {
 
 margin: 0;
 @media screen and (max-width: 768px) {
-    font-size: 14px;}
+    font-size: 14px;
+    display: flex;
+    flex-direction: column;
 
 `
 
