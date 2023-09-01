@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
-import InputMask from 'react-input-mask';
+
 import {
   StyledForm,
   Label,
@@ -18,21 +18,12 @@ const formSchema = Yup.object().shape({
     .min(2, 'Too Short!')
     .required('This field is required, please fill that'),
   number: Yup.string()
-    .matches(
-      /^\+380[-\s\d]*$/,
-      'Must start with +380'
-    )
+    .matches(/^\+380[-\s\d]*$/, 'Must start with +380')
     .min(12, 'Too Short!')
     .required('This field is required, please fill that'),
 });
 
 const MyForm = ({ onSubmit }) => {
-  const handleNumberChange = e => {
-    const inputText = e.target.value;
-
-    // Проверяем, что пользователь не удаляет символ "+"
-  };
-
   return (
     <Formik
       initialValues={{
